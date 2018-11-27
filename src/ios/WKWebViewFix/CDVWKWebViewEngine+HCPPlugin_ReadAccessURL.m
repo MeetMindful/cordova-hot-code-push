@@ -33,7 +33,9 @@
 			else {
 				NSURL *wwwPath = [NSURL URLWithString:vc.wwwFolderName];
 			    if(wwwPath.fileURL) {
-			        newUrl.path = [@"/local-filesystem" stringByAppendingString:[wwwPath.path stringByAppendingString:@"/index.html"] ];
+			    		NSString *newPath = [@"/local-filesystem" stringByAppendingString: "_file_/"];
+			        newUrl.path = [ newPath stringByAppendingString:[wwwPath.path stringByAppendingString:@"index.html"] ];
+        			NSLog(@"new pathing that bitch %@", newUrl.path);
 
 			        return [(WKWebView*)self.engineWebView loadRequest:[NSURLRequest requestWithURL:newUrl.URL]];
 			    }

@@ -278,7 +278,6 @@ static NSString *const DEFAULT_STARTING_PAGE = @"index.html";
 
     // rewrite starting page www folder path: should load from external storage
     if ([self.viewController isKindOfClass:[CDVViewController class]]) {
-        NSLog(@"resetting that bitch %@", _filesStructure.wwwFolder.absoluteString);
         ((CDVViewController *)self.viewController).wwwFolderName = _filesStructure.wwwFolder.absoluteString;
     } else {
         NSLog(@"HotCodePushError: Can't make starting page to be from external storage. Main controller should be of type CDVViewController.");
