@@ -25,7 +25,9 @@
 
 			//Case: Navigation after update install complete
 			if (request.URL.fileURL) {
-			    newUrl.path = [@"/local-filesystem" stringByAppendingString: request.URL.path];            
+	    		NSString *newPath = [@"/local-filesystem" stringByAppendingString: "_file_/"];
+	        newUrl.path = [ newPath stringByAppendingString: request.URL.path ];
+    			NSLog(@"new pathing that other bitch %@", newUrl.path);
 
 			    return [(WKWebView*)self.engineWebView loadRequest:[NSURLRequest requestWithURL:newUrl.URL]];
 			} 
