@@ -5,6 +5,8 @@
 //
 
 #import "CDVWKWebViewEngine.h"
+#import "GCDWebServer.h"
+#import "GCDWebServerPrivate.h"
 
 @interface CDVWKWebViewEngine (HCPPlugin_ReadAccessURL)
 
