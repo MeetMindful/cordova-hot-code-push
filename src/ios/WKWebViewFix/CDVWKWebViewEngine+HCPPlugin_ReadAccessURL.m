@@ -14,13 +14,13 @@
 
 		NSLog(@"we are actually using this hot code fix");
 
-    (CDVWKWebViewEngine*)self.basePath = path;
-    BOOL restart = [(CDVWKWebViewEngine*)self.webServer isRunning];
+    (WKWebView*)self.basePath = path;
+    BOOL restart = [(WKWebView*)self.webServer isRunning];
     if (restart) {
       [(WKWebView*)self.webServer stop];
     }
     
-    if ((CDVWKWebViewEngine*)self.CDV_LOCAL_SERVER == nil) {
+    if ((WKWebView*)self.CDV_LOCAL_SERVER == nil) {
         NSDictionary * settings = (CDVWKWebViewEngine*)self.commandDelegate.settings;
         //bind to designated hostname or default to localhost
         NSString *bind = [settings cordovaSettingForKey:@"WKBind"];
@@ -35,10 +35,10 @@
     
     NSString *serverUrl = self.CDV_LOCAL_SERVER;
     
-    [(CDVWKWebViewEngine*)self.webServer addGETHandlerForBasePath:@"/" directoryPath:path indexFilename:((CDVViewController *)self.viewController).startPage cacheAge:0 allowRangeRequests:YES];
+    [(WKWebView*)self.webServer addGETHandlerForBasePath:@"/" directoryPath:path indexFilename:((CDVViewController *)self.viewController).startPage cacheAge:0 allowRangeRequests:YES];
     
     NSString *codePushUrl =@"(^/var/mobile/|^/Users/)";
-    [(CDVWKWebViewEngine*)self.webServer addHandlerForMethod:@"GET" pathRegex:codePushUrl requestClass:GCDWebServerFileRequest.class asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    [(WKWebView*)self.webServer addHandlerForMethod:@"GET" pathRegex:codePushUrl requestClass:GCDWebServerFileRequest.class asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         
         NSString *absUrl = [[[request URL] absoluteString] stringByReplacingOccurrencesOfString:serverUrl withString:@""];
         absUrl = [absUrl stringByRemovingPercentEncoding];
@@ -50,7 +50,7 @@
         completionBlock(response);
     }];
     
-    [(CDVWKWebViewEngine*)self.webServer addHandlerForMethod:@"GET" pathRegex:@"_file_/" requestClass:GCDWebServerFileRequest.class asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    [(WKWebView*)self.webServer addHandlerForMethod:@"GET" pathRegex:@"_file_/" requestClass:GCDWebServerFileRequest.class asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         NSString *urlToRemove = [serverUrl stringByAppendingString:@"/_file_"];
         NSString *absUrl = [[[request URL] absoluteString] stringByReplacingOccurrencesOfString:urlToRemove withString:@""];
  				absUrl = [absUrl stringByRemovingPercentEncoding];
@@ -63,7 +63,7 @@
          completionBlock(response);
      }];
      if (restart) {
-         (CDVWKWebViewEngine*)[self startServer];
+         (WKWebView*)[self startServer];
      }
  }
 

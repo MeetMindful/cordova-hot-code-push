@@ -6,7 +6,9 @@
 
 #import "CDVWKWebViewEngine.h"
 
-@interface CDVWKWebViewEngine (HCPPlugin_ReadAccessURL)
+@implementation CDVWKWebViewEngine (HCPPlugin_ReadAccessURL)
+
+-(void)setServerPath:(NSString*)path;
 
 @end
 
