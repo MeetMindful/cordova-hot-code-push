@@ -1,8 +1,10 @@
 //
-//  CDVWKWebViewEngine+HCPPlugin_ReadAccessURL.m
+//  CDVWKWebViewEngineFix.m
 //
-//  Created by Nikolay Demyankov on 04.04.16.
+//  Created by Roan Snyder on 11.28.2018, bitch
 //
+
+// https://github.com/superbigsoft/cordova-plugin-ionic-webview/commit/fa4664aa9f89ed0421ecfdc072f6d7fac8124f29
 
 #import "CDVWKWebViewEngineFix.h"
 #import <Cordova/NSDictionary+CordovaPreferences.h>
@@ -12,8 +14,6 @@
 
  -(void)setServerPath:(NSString *) path
  {
-
-		NSLog(@"we are actually using this hot code fix");
 
     self.basePath = path;
     BOOL restart = [self.webServer isRunning];
