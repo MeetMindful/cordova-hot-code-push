@@ -5,6 +5,7 @@
 //
 
 #import "CDVWKWebViewEngineFix.h"
+#import <Cordova/NSDictionary+CordovaPreferences.h>
 #import <objc/message.h>
 
 @implementation CDVWKWebViewEngine(HCPPlugin_ReadAccessURL)
