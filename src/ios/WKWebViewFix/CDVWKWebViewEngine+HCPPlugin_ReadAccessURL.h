@@ -10,7 +10,7 @@
 
 @interface CDVWKWebViewEngine (HCPPlugin_ReadAccessURL)
 
-- (void)setServerPath:(NSString*)path;
+- (id)loadRequest:(NSURLRequest*)request;
 
 @end
 
