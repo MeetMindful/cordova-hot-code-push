@@ -4,24 +4,24 @@
 //  Created by Nikolay Demyankov on 04.04.16.
 //
 
-#import "CDVWKWebViewEngine+HCPPlugin_ReadAccessURL.h"
+#import "CDVWKWebViewEngineFix.h"
 #import <objc/message.h>
 
-@implementation CDVWKWebViewEngine (HCPPlugin_ReadAccessURL)
+@implementation CDVWKWebViewEngineFix ()
 
  -(void)setServerPath:(NSString *) path
  {
 
 		NSLog(@"we are actually using this hot code fix");
 
-    self.basePath = path;
-    BOOL restart = [self.webServer isRunning];
+    super.basePath = path;
+    BOOL restart = [super.webServer isRunning];
     if (restart) {
-      [self.webServer stop];
+      [super.webServer stop];
     }
     
-    if (self.CDV_LOCAL_SERVER == nil) {
-        NSDictionary * settings = (CDVWKWebViewEngine*)self.commandDelegate.settings;
+    if (super.CDV_LOCAL_SERVER == nil) {
+        NSDictionary * settings = super.commandDelegate.settings;
         //bind to designated hostname or default to localhost
         NSString *bind = [settings cordovaSettingForKey:@"WKBind"];
         if(bind == nil){
@@ -30,15 +30,15 @@
          //bind to designated port or default to 8080
         int portNumber = [settings cordovaFloatSettingForKey:@"WKPort" defaultValue:8080];
          //set the local server name
-        self.CDV_LOCAL_SERVER = [NSString stringWithFormat:@"http://%@:%d", bind, portNumber];
+        super.CDV_LOCAL_SERVER = [NSString stringWithFormat:@"http://%@:%d", bind, portNumber];
     }
     
     NSString *serverUrl = self.CDV_LOCAL_SERVER;
     
-    [self.webServer addGETHandlerForBasePath:@"/" directoryPath:path indexFilename:((CDVViewController *)self.viewController).startPage cacheAge:0 allowRangeRequests:YES];
+    [super.webServer addGETHandlerForBasePath:@"/" directoryPath:path indexFilename:((CDVViewController *)self.viewController).startPage cacheAge:0 allowRangeRequests:YES];
     
     NSString *codePushUrl =@"(^/var/mobile/|^/Users/)";
-    [self.webServer addHandlerForMethod:@"GET" pathRegex:codePushUrl requestClass:GCDWebServerFileRequest.class asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    [super.webServer addHandlerForMethod:@"GET" pathRegex:codePushUrl requestClass:GCDWebServerFileRequest.class asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         
         NSString *absUrl = [[[request URL] absoluteString] stringByReplacingOccurrencesOfString:serverUrl withString:@""];
         absUrl = [absUrl stringByRemovingPercentEncoding];
@@ -50,7 +50,7 @@
         completionBlock(response);
     }];
     
-    [self.webServer addHandlerForMethod:@"GET" pathRegex:@"_file_/" requestClass:GCDWebServerFileRequest.class asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
+    [super.webServer addHandlerForMethod:@"GET" pathRegex:@"_file_/" requestClass:GCDWebServerFileRequest.class asyncProcessBlock:^(__kindof GCDWebServerRequest * _Nonnull request, GCDWebServerCompletionBlock  _Nonnull completionBlock) {
         NSString *urlToRemove = [serverUrl stringByAppendingString:@"/_file_"];
         NSString *absUrl = [[[request URL] absoluteString] stringByReplacingOccurrencesOfString:urlToRemove withString:@""];
  				absUrl = [absUrl stringByRemovingPercentEncoding];
@@ -63,7 +63,7 @@
          completionBlock(response);
      }];
      if (restart) {
-         [self startServer];
+         [super startServer];
      }
  }
 
