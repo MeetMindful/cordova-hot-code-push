@@ -7,7 +7,7 @@
 #import "CDVWKWebViewEngineFix.h"
 #import <objc/message.h>
 
-@implementation CDVWKWebViewEngineFix ()
+@implementation CDVWKWebViewEngineFix
 
  -(void)setServerPath:(NSString *) path
  {
