@@ -10,8 +10,6 @@
 
 @interface CDVWKWebViewEngine (HCPPlugin_ReadAccessURL)
 
-- (id)loadRequest:(NSURLRequest*)request;
-
 @end
 
 #endif
