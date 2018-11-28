@@ -1,10 +1,8 @@
 //
 //  CDVWKWebViewEngine+HCPPlugin_ReadAccessURL.h
 //
-//  Created by Nikolay Demyankov on 04.04.16.
+//  Created by Roan Snyder on 11.28.2018, bitch
 //
-
-#if WK_WEBVIEW_ENGINE_IS_USED
 
 #import "CDVWKWebViewEngine.h"
 
@@ -12,4 +10,3 @@
 
 @end
 
-#endif
