@@ -106,6 +106,8 @@ static NSString *const DEFAULT_STARTING_PAGE = @"index.html";
         _pluginInternalPrefs.currentReleaseVersionName = config.contentConfig.releaseVersion;
 
         [_pluginInternalPrefs saveToUserDefaults];
+        // https://github.com/salb3la/cordova-hot-code-push/commit/7ccb90fc1dbaa03133a9304933952ddac7298da1
+        _filesStructure = [[HCPFilesStructure alloc] initWithReleaseVersion:_pluginInternalPrefs.currentReleaseVersionName];
     }
 
     [HCPAssetsFolderHelper installWwwFolderToExternalStorageFolder:_filesStructure.wwwFolder];
