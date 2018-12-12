@@ -608,6 +608,8 @@ public class HotCodePushPlugin extends CordovaPlugin {
             pluginInternalPrefs.setCurrentReleaseVersionName(appConfig.getContentConfig().getReleaseVersion());
 
             pluginInternalPrefsStorage.storeInPreference(pluginInternalPrefs);
+            // https://github.com/salb3la/cordova-hot-code-push/commit/7ccb90fc1dbaa03133a9304933952ddac7298da1
+            fileStructure.switchToRelease(pluginInternalPrefs.getCurrentReleaseVersionName());
         }
 
         AssetsHelper.copyAssetDirectoryToAppDirectory(cordova.getActivity().getApplicationContext(), WWW_FOLDER, fileStructure.getWwwFolder());
@@ -984,7 +986,7 @@ public class HotCodePushPlugin extends CordovaPlugin {
         pluginInternalPrefsStorage.storeInPreference(pluginInternalPrefs);
 
         fileStructure.switchToRelease(pluginInternalPrefs.getCurrentReleaseVersionName());
-
+        
         handler.post(new Runnable() {
             @Override
             public void run() {
