@@ -986,7 +986,7 @@ public class HotCodePushPlugin extends CordovaPlugin {
         pluginInternalPrefsStorage.storeInPreference(pluginInternalPrefs);
 
         fileStructure.switchToRelease(pluginInternalPrefs.getCurrentReleaseVersionName());
-
+        
         handler.post(new Runnable() {
             @Override
             public void run() {

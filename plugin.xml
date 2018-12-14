@@ -199,5 +199,6 @@
     <source-file src="src/android/src/com/nordnetab/chcp/main/view/AppUpdateRequestDialog.java" target-dir="src/com/nordnetab/chcp/main/view"/>
     <!-- sources for package: com.nordnetab.chcp -->
     <source-file src="src/android/src/com/nordnetab/chcp/main/HotCodePushPlugin.java" target-dir="src/com/nordnetab/chcp/main"/>
+    <source-file src="src/android/src/com/nordnetab/chcp/main/WKWebViewFix/IonicWebViewEngineFix.java" target-dir="WKWebViewFix/"/>
   </platform>
 </plugin>
